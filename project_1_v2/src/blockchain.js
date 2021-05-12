@@ -87,6 +87,10 @@ class Blockchain {
         .then(block => {
             this.chain.push(block);
             this.height = this.chain.length - 1;
+
+            // validate chain each time when one block is added
+            this.validateChain();
+
             return block;
         });
     }

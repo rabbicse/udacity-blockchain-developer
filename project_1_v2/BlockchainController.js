@@ -118,6 +118,18 @@ class BlockchainController {
         });
     }
 
+    // Endpoint that allows user to request validate chain (GET Endpoint)
+    requestValidateChain() {
+        this.app.get("/validateChain", async (req, res) => {
+            try {
+                await this.blockchain.validateChain();
+                return res.status(200).json({"status": "SUCCESS"});
+            } catch (error) {
+                return res.status(500).send("An error happened!");
+            }
+        });
+    }
+
 }
 
 module.exports = (app, blockchainObj) => { return new BlockchainController(app, blockchainObj);}
