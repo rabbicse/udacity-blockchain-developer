@@ -86,13 +86,14 @@ class Blockchain {
         })
         .catch(error => console.log('ERROR at _addBlock ', error)) 
         .then(block => {
-            this.chain.push(block);
-            this.height = this.chain.length - 1;
-
-            // validate chain each time when one block is added
-            await this.validateChain();
-
-            return block;
+            self.validateChain().then(response => {
+                this.chain.push(block);
+                this.height = this.chain.length - 1;
+                return block;
+            }, reason => { // If validate fails return error and pop block
+                self.chain.pop();
+                resolve (reason)
+            });
         });
     }
 
