@@ -90,7 +90,7 @@ class Blockchain {
             this.height = this.chain.length - 1;
 
             // validate chain each time when one block is added
-            this.validateChain();
+            await this.validateChain();
 
             return block;
         });
@@ -188,7 +188,11 @@ class Blockchain {
     getStarsByWalletAddress (address) {
         let self = this;
         let stars = [];
-        return new Promise((resolve, reject) => {
+
+        return new Promise(async (resolve, reject) => {
+            // validate chain first
+            await self.validateChain();
+
             let ownedBlocks = self.chain.filter(block => block.owner === address);
             if (ownedBlocks.length === 0) reject(new Error('Address not found.'));
             stars = ownedBlocks.map(block => JSON.parse(hex2ascii(block.body)));
