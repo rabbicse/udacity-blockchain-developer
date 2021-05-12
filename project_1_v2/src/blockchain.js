@@ -9,6 +9,7 @@
  */
 
 const SHA256 = require('crypto-js/sha256');
+const hex2ascii = require('hex2ascii');
 const BlockClass = require('./block.js');
 const bitcoinMessage = require('bitcoinjs-message');
 
