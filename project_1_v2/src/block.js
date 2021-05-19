@@ -51,7 +51,7 @@ class Block {
             self.hash = currentHash;
 
             // Comparing if the hashes changed
-            // Returning the Block is not valid
+            // Returning the Block is not valids
             // Returning the Block is valid
             resolve(currentHash == newHash);
         });
